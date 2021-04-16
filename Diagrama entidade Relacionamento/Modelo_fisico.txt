@@ -1,0 +1,39 @@
+/* Lógico_1: */
+
+CREATE TABLE Usuarios (
+    nome VARCHAR,
+    id_func INTEGER PRIMARY KEY,
+    email VARCHAR,
+    funcao VARCHAR,
+    senhaHash VARCHAR,
+    fk_Pacientes_id_func INTEGER
+);
+
+CREATE TABLE Pacientes (
+    id_paciente INTEGER,
+    data_entrada TIME,
+    nome_paciente VARCHAR,
+    id_func INTEGER PRIMARY KEY,
+    quadro_clinico VARCHAR,
+    status_paciente VARCHAR,
+    Numero_quarto DOUBLE
+);
+
+CREATE TABLE Logs (
+    id VARCHAR PRIMARY KEY,
+    acao_usu DOUBLE,
+    data_log TIME,
+    id_func INTEGER,
+    descricao_log VARCHAR,
+    fk_Usuarios_id_func INTEGER
+);
+ 
+ALTER TABLE Usuarios ADD CONSTRAINT FK_Usuarios_2
+    FOREIGN KEY (fk_Pacientes_id_func)
+    REFERENCES Pacientes (id_func)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Logs ADD CONSTRAINT FK_Logs_2
+    FOREIGN KEY (fk_Usuarios_id_func)
+    REFERENCES Usuarios (id_func)
+    ON DELETE CASCADE;
